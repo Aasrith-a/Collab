@@ -1,0 +1,128 @@
+
+import React, { useState } from "react";
+
+// Embedded CSS styles as JS object
+const dashboardStyles = {
+  container: {
+    fontFamily: "'Segoe UI', Arial, sans-serif",
+    background: "#fff8f0",
+    minHeight: "100vh",
+    padding: "30px",
+  },
+  header: {
+    padding: "10px 0 20px",
+    fontSize: "2rem",
+    color: "#f97c74",
+    fontWeight: "600",
+    borderBottom: "2px solid #ffe6dd",
+    marginBottom: "30px",
+  },
+  nav: {
+    display: "flex",
+    gap: "18px",
+    marginBottom: "22px",
+  },
+  navItem: {
+    padding: "8px 16px",
+    cursor: "pointer",
+    borderRadius: "18px",
+    border: "none",
+    backgroundColor: "#fce6e0",
+    color: "#f97c74",
+    fontWeight: "500",
+    transition: "background-color 0.2s",
+  },
+  navItemActive: {
+    backgroundColor: "#f97c74",
+    color: "#fff8f0",
+  },
+  content: {
+    background: "#fff",
+    borderRadius: "12px",
+    boxShadow: "0 2px 8px #f7dfd9cc",
+    padding: "22px",
+    minHeight: "250px",
+  },
+};
+
+function Dashboard() {
+  const [activeTab, setActiveTab] = useState("Overview");
+
+  // Main tab content
+  function renderContent() {
+    switch (activeTab) {
+      case "Overview":
+        return (
+          <div>
+            <h2>Overview</h2>
+            <p>Welcome to Tina Sweet Center! Track programs, events, and healthy recipes for all ages.</p>
+          </div>
+        );
+      case "Programs":
+        return (
+          <div>
+            <h2>Programs</h2>
+            <ul>
+              <li>Sweet Fitness Classes</li>
+              <li>Mindful Meditation</li>
+              <li>Nutrition Guidance</li>
+            </ul>
+          </div>
+        );
+      case "Events":
+        return (
+          <div>
+            <h2>Upcoming Events</h2>
+            <ul>
+              <li>26 Sep: Yoga for Beginners</li>
+              <li>3 Oct: Dessert Expo</li>
+              <li>10 Oct: Cooking Workshop</li>
+            </ul>
+          </div>
+        );
+      case "Recipes":
+        return (
+          <div>
+            <h2>Sweet Recipes</h2>
+            <ul>
+              <li>Strawberry Yogurt Parfait</li>
+              <li>Healthy Chocolate Truffles</li>
+              <li>Fruit Salad with Honey Drizzle</li>
+            </ul>
+          </div>
+        );
+      default:
+        return null;
+    }
+  }
+
+  // Navigation tabs
+  const tabs = ["Overview", "Programs", "Events", "Recipes"];
+
+  return (
+    <div style={dashboardStyles.container}>
+      <div style={dashboardStyles.header}>
+        Tina Sweet Center Dashboard
+      </div>
+      <div style={dashboardStyles.nav}>
+        {tabs.map(tab => (
+          <button
+            key={tab}
+            style={{
+              ...dashboardStyles.navItem,
+              ...(activeTab === tab ? dashboardStyles.navItemActive : {}),
+            }}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+      <div style={dashboardStyles.content}>
+        {renderContent()}
+      </div>
+    </div>
+  );
+}
+
+export default Dashboard;
